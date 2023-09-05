@@ -22,15 +22,19 @@ const Root = () => {
 
   // Timezone
   const timeZone = moment.tz.guess();
-  console.log({ timeZone });
-
-  console.log({
-    losAngelesTime: losAngelesTime.toString(),
-    koreanTime: koreanTime.toString(),
-  });
+  // console.log({ timeZone });
+  // console.log({
+  //   losAngelesTime: losAngelesTime.toString(),
+  //   koreanTime: koreanTime.toString(),
+  // });
   const [date, setDate] = useState(now);
   const savePostToServer = () => {
     console.log({ date });
+    createPostMutation({
+      variables: {
+        date,
+      },
+    });
   };
 
   if (loading) {

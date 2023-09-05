@@ -5,7 +5,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { join } from 'path';
 import { AppResolver } from './app.resolver';
 import { AppService } from './app.service';
-import { Post, PostSchema } from './schemas/date.schema';
+import { Post, PostSchema } from './schemas/post.schema';
 
 @Module({
   imports: [

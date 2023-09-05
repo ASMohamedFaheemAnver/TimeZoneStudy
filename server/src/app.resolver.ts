@@ -1,7 +1,7 @@
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { AppService } from './app.service';
 import { Message } from './common/message';
-import { Post } from './schemas/date.schema';
+import { Post } from './schemas/post.schema';
 
 @Resolver()
 export class AppResolver {
