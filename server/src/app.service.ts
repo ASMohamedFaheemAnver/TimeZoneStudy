@@ -8,6 +8,10 @@ export class AppService {
   private readonly logger = new Logger(AppService.name);
   constructor(@InjectModel(Post.name) private postModel: Model<PostDocument>) {}
 
+  getPosts() {
+    return this.postModel.find({});
+  }
+
   async createPost(date: Date): Promise<Post> {
     console.log({ date });
     const newDate = new this.postModel({ date });

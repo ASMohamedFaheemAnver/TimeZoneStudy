@@ -17,6 +17,7 @@ type Message {
 
 type Query {
   root: Message!
+  getPosts: [Post!]!
 }
 
 type Mutation {

@@ -1,5 +1,6 @@
 import { useMutation, useQuery } from "@apollo/client";
 import { CREATE_POST_MUTATION } from "graphql/mutations/post";
+import { GET_POSTS_QUERY } from "graphql/queries/post";
 import { ROOT_QUERY } from "graphql/queries/root";
 import moment from "moment-timezone";
 import { useState } from "react";
@@ -10,6 +11,10 @@ const Root = () => {
     createPostMutation,
     { loading: isCreatePostLoading, data: createPostData },
   ] = useMutation(CREATE_POST_MUTATION);
+  const { data: getPostsData } = useQuery(GET_POSTS_QUERY);
+  const posts = getPostsData?.getPosts;
+  if (posts) console.log({ posts });
+
   // const now2 = moment().toDate();
   const now3 = moment();
   const now4 = moment();
@@ -43,6 +48,13 @@ const Root = () => {
   return (
     <div>
       <p>{data?.root?.message}</p>
+      <div>
+        {posts?.map((post, i) => {
+          return <p key={i}>{moment(post?.date).toString()}</p>;
+          // return <p key={i}>{new Date(post?.date).toString()}</p>;
+        })}
+      </div>
+
       <input
         value={date}
         onChange={(e) => setDate(e.target.value)}

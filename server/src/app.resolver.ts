@@ -13,6 +13,11 @@ export class AppResolver {
     return { message: 'server is up and running' };
   }
 
+  @Query((_) => [Post])
+  getPosts() {
+    return this.appService.getPosts();
+  }
+
   // Mutations
   @Mutation((_) => Post)
   createPost(@Args('date') date: Date) {
