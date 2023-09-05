@@ -6,6 +6,7 @@ import { join } from 'path';
 import { AppResolver } from './app.resolver';
 import { AppService } from './app.service';
 import { Post, PostSchema } from './schemas/post.schema';
+import { DateScalar } from './scalar/DateScalar';
 
 @Module({
   imports: [
@@ -18,6 +19,6 @@ import { Post, PostSchema } from './schemas/post.schema';
     MongooseModule.forFeature([{ name: Post.name, schema: PostSchema }]),
   ],
   controllers: [],
-  providers: [AppResolver, AppService],
+  providers: [AppResolver, AppService, DateScalar],
 })
 export class AppModule {}

@@ -1,1 +1,3 @@
 # Client date(localTimestamp) => Server date(graphql automatically converting it to utc.)
+# We don't need to do anything the time zone is automatically converting.
+# We don't need custom scalar as well.
