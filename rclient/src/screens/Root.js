@@ -20,6 +20,10 @@ const Root = () => {
   // Korean time
   const koreanTime = now4.tz("Asia/Seoul");
 
+  // Timezone
+  const timeZone = moment.tz.guess();
+  console.log({ timeZone });
+
   console.log({
     losAngelesTime: losAngelesTime.toString(),
     koreanTime: koreanTime.toString(),
