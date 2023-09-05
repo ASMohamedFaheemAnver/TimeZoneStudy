@@ -10,6 +10,8 @@ async function bootstrap() {
         : ['log', 'debug', 'error', 'verbose', 'warn'],
   });
   app.useGlobalPipes(new ValidationPipe({ whitelist: true }));
-  await app.listen(5000);
+  const PORT = process.env.PORT || 5000;
+  await app.listen(PORT);
+  console.log({ msg: `SERVER IS UP AND RUNNING ON : ${PORT}` });
 }
 bootstrap();

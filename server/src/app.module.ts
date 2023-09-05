@@ -5,17 +5,17 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { join } from 'path';
 import { AppResolver } from './app.resolver';
 import { AppService } from './app.service';
-import { User, UserSchema } from './schemas/user.schema';
+import { Post, PostSchema } from './schemas/date.schema';
 
 @Module({
   imports: [
-    MongooseModule.forRoot('mongodb://localhost/cache'),
+    MongooseModule.forRoot('mongodb://localhost/timezone'),
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
       autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
       playground: process.env.NODE_ENV !== 'prod',
     }),
-    MongooseModule.forFeature([{ name: User.name, schema: UserSchema }]),
+    MongooseModule.forFeature([{ name: Post.name, schema: PostSchema }]),
   ],
   controllers: [],
   providers: [AppResolver, AppService],
