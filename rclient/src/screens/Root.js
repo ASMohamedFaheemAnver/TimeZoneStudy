@@ -13,7 +13,6 @@ const Root = () => {
   ] = useMutation(CREATE_POST_MUTATION);
   const { data: getPostsData } = useQuery(GET_POSTS_QUERY);
   const posts = getPostsData?.getPosts;
-  if (posts) console.log({ posts });
 
   // const now2 = moment().toDate();
   const now3 = moment();

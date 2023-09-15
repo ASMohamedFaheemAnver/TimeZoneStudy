@@ -13,7 +13,7 @@ export class AppService {
   }
 
   async createPost(date: Date): Promise<Post> {
-    console.log({ date });
+    // console.log({ date });
     const newDate = new this.postModel({ date });
     await newDate.save();
     return newDate;
