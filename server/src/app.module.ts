@@ -6,9 +6,23 @@ import { join } from 'path';
 import { AppResolver } from './app.resolver';
 import { AppService } from './app.service';
 import { Post, PostSchema } from './schemas/post.schema';
+import { Post as PostEntity } from './entities/post.entity';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { type, host, port, username, password, database } from './config';
 
 @Module({
   imports: [
+    TypeOrmModule.forRoot({
+      type,
+      host,
+      port,
+      username,
+      password,
+      database,
+      entities: [PostEntity],
+      synchronize: true,
+    }),
+    TypeOrmModule.forFeature([PostEntity]),
     MongooseModule.forRoot('mongodb://localhost/timezone'),
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
