@@ -11,4 +11,8 @@ export class Post {
   @Field()
   @Column()
   date: Date;
+
+  @Field()
+  @Column({ default: () => 'CURRENT_TIMESTAMP' })
+  created: Date;
 }

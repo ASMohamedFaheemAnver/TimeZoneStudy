@@ -21,7 +21,7 @@ export class AppService {
     // MONGO END
 
     const posts = await this.postRepository.find();
-    console.log({ posts });
+    // console.log({ posts });
     return posts;
   }
 

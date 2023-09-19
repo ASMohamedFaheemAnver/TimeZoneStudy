@@ -12,6 +12,11 @@ async function bootstrap() {
   app.useGlobalPipes(new ValidationPipe({ whitelist: true }));
   const PORT = process.env.PORT || 5000;
   await app.listen(PORT);
-  console.log({ msg: `SERVER IS UP AND RUNNING ON : ${PORT}` });
+  const currentTime = new Date();
+  console.log({
+    msg: `SERVER IS UP AND RUNNING ON : ${PORT}, TZ : ${
+      process.env.TZ
+    } AND CURRENT TIME : ${currentTime.toLocaleString()}`,
+  });
 }
 bootstrap();
