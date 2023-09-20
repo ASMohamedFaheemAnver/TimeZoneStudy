@@ -5,6 +5,7 @@ import { Post, PostDocument } from './schemas/post.schema';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Post as PostEntity } from './entities/post.entity';
 import { Repository } from 'typeorm';
+import * as moment from 'moment-timezone';
 
 @Injectable()
 export class AppService {
@@ -23,20 +24,28 @@ export class AppService {
     // MONGO END
 
     const posts = await this.postRepository.find();
-    console.log({ posts });
+    // console.log({ posts });
     return posts;
   }
 
-  async createPost(date: Date): Promise<PostEntity> {
-    console.log({ date });
+  async createPost(date: Date, tz: string): Promise<PostEntity> {
+    console.log({ date, tz });
     // MONGO START
     // const newDate = new this.postModel({ date });
     // await newDate.save();
     // return newDate;
     // MONGO END
 
+    // FORMATTING TO REMOVE THE TZ STRING WHICH CAUSING UNWANTED ISSUES
+    const formattedDate = moment(date).format('YYYY-MM-DD HH:mm');
+    const convertedDate = moment.tz(formattedDate, tz);
+    const utcTime = convertedDate.clone().utc();
     const newPost = this.postRepository.create({
-      date,
+      date: utcTime.toDate(),
+    });
+    console.log({
+      convertedDate: convertedDate.toString(),
+      utcTime: utcTime.toString(),
     });
     await this.postRepository.save(newPost);
     return newPost;
