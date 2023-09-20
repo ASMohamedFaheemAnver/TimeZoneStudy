@@ -1,0 +1,84 @@
+* Case 1 : DB as mysql
+
+### While saving ###
+(Client: Sending current time as is to the server.)
+Tokyo
+2023/9/20:15:06
+
+-5:30
+
+(Server: Server reducing -5:30 and showing that as the date while console logging.)
+SL
+2023/09/20:09:36
+
++5:30
+
+(DB: While saving somehow it saving the client sent date(+5:30) in the db.)
+SL
+2023/90/20:15:06
+
+
+### While retrieving ###
+
+(DB)
+SL
+2023/90/20:15:06
+
+-5:30
+
+(Server: Retrieving date is somehow coming as utc of that coming date.)
+SL
+2023/09/20:09:36
+
++9:00
+
+(Client: Client treating the receiving date as utc and converting it to sensor's timezone)
+Tokyo
+2023/09/20:18:36
+
+* Conclusion
+-> Server treating any date coming to it as it's current tz date and converting it to utc.
+-> If that's the case why saved date is converted back to server/db's timezone is unknown.
+
+
+* Case 2 : DB as mongodb
+
+### While saving ###
+(Client: Sending current time as is to the server.)
+Tokyo
+2023/9/20:15:38
+
+-5:30
+
+(Server: Server reducing -5:30 and showing that as the date while console logging.)
+SL
+2023/09/20:10:08
+
++0
+
+(DB)
+SL
+2023/09/20:10:08
+
+
+### While retrieving ###
+
+(DB)
+SL
+2023/09/20:10:08
+
+-0
+
+(Server)
+SL
+2023/09/20:10:08
+
++9:00
+
+(Client: Client treating the receiving date as utc and converting it to sensor's timezone)
+Tokyo
+2023/09/20:18:36
+
+* Conclusion
+-> It's seems like mysql server is running in sl timezone and mongo is running in utc timezone thus mongodb not converting the saving and retrieving dates.
+-> SELECT @@GLOBAL.time_zone, @@SESSION.time_zone; giving "SYSTEM" as output which means mysql run in system timezone thus it's in sl timezone I guess.
