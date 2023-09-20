@@ -17,28 +17,28 @@ export class AppService {
 
   async getPosts() {
     // MONGO START
-    const posts = await this.postModel.find({});
-    console.log({ posts });
-    return posts;
-    // MONGO END
-
-    // const posts = await this.postRepository.find();
+    // const posts = await this.postModel.find({});
     // console.log({ posts });
     // return posts;
-  }
-
-  async createPost(date: Date): Promise<Post> {
-    console.log({ date });
-    // MONGO START
-    const newDate = new this.postModel({ date });
-    await newDate.save();
-    return newDate;
     // MONGO END
 
-    // const newPost = this.postRepository.create({
-    //   date,
-    // });
-    // await this.postRepository.save(newPost);
-    // return newPost;
+    const posts = await this.postRepository.find();
+    console.log({ posts });
+    return posts;
+  }
+
+  async createPost(date: Date): Promise<PostEntity> {
+    console.log({ date });
+    // MONGO START
+    // const newDate = new this.postModel({ date });
+    // await newDate.save();
+    // return newDate;
+    // MONGO END
+
+    const newPost = this.postRepository.create({
+      date,
+    });
+    await this.postRepository.save(newPost);
+    return newPost;
   }
 }

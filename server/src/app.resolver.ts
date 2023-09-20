@@ -14,13 +14,13 @@ export class AppResolver {
     return { message: 'server is up and running' };
   }
 
-  @Query((_) => [Post])
+  @Query((_) => [PostEntity])
   getPosts() {
     return this.appService.getPosts();
   }
 
   // Mutations
-  @Mutation((_) => Post)
+  @Mutation((_) => PostEntity)
   createPost(@Args('date') date: Date) {
     return this.appService.createPost(date);
   }

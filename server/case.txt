@@ -34,7 +34,7 @@ SL
 
 (Client: Client treating the receiving date as utc and converting it to sensor's timezone)
 Tokyo
-2023/09/20:18:36
+2023/09/20:09:36 + 9H
 
 * Conclusion
 -> Server treating any date coming to it as it's current tz date and converting it to utc.
@@ -77,7 +77,7 @@ SL
 
 (Client: Client treating the receiving date as utc and converting it to sensor's timezone)
 Tokyo
-2023/09/20:18:36
+2023/09/20:10:08 + 9H
 
 * Conclusion
 -> It's seems like mysql server is running in sl timezone and mongo is running in utc timezone thus mongodb not converting the saving and retrieving dates.
@@ -120,4 +120,48 @@ UTC
 
 (Client: Client treating the receiving date as utc and converting it to sensor's timezone)
 Tokyo
-2023/09/20:18:36
+2023/9/20:16:03 + 9H
+
+
+* Case 3 : DB as mysql
+
+### While saving ###
+(Client: Sending current time as is to the server.)
+Tokyo
+2023/9/20:16:10
+
+-0
+
+(Server)
+UTC
+2023/9/20:16:10
+
++0
+
+(DB)
+UTC
+2023/9/20:16:10
+
+
+### While retrieving ###
+
+(DB)
+UTC
+2023/9/20:16:10
+
+-0
+
+(Server)
+UTC
+2023/9/20:16:10
+
++9:00
+
+(Client: Client treating the receiving date as utc and converting it to sensor's timezone)
+Tokyo
+2023/09/21:01:10
+
+
+* Final conclusion
+-> It doesn't matter about db timezone, the complication happening if server is other than UTC timezone.
+-> If the server is in UTC timezone it's treating any input as utc, I guess we need to take client timezone as input and save utc time in db and send utc time to client as well.
