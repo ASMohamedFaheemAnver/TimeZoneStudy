@@ -8,7 +8,15 @@ import { AppService } from './app.service';
 import { Post, PostSchema } from './schemas/post.schema';
 import { Post as PostEntity } from './entities/post.entity';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { type, host, port, username, password, database } from './config';
+import {
+  type,
+  host,
+  port,
+  username,
+  password,
+  database,
+  timezone,
+} from './config';
 
 @Module({
   imports: [
@@ -20,6 +28,7 @@ import { type, host, port, username, password, database } from './config';
       password,
       database,
       entities: [PostEntity],
+      timezone,
       synchronize: true,
     }),
     TypeOrmModule.forFeature([PostEntity]),
