@@ -18,37 +18,37 @@ export class AppService {
 
   async getPosts() {
     // MONGO START
-    // const posts = await this.postModel.find({});
+    const posts = await this.postModel.find({});
     // console.log({ posts });
-    // return posts;
     // MONGO END
 
-    const posts = await this.postRepository.find();
+    // const posts = await this.postRepository.find();
     // console.log({ posts });
     return posts;
   }
 
-  async createPost(date: Date, tz: string): Promise<PostEntity> {
+  async createPost(date: Date, tz: string): Promise<Post> {
     // SERVER SHOULD BE IN UTC TO MAKE IT WORK
     console.log({ date, tz });
-    // MONGO START
-    // const newDate = new this.postModel({ date });
-    // await newDate.save();
-    // return newDate;
-    // MONGO END
-
     // FORMATTING TO REMOVE THE TZ STRING WHICH CAUSING UNWANTED ISSUES
     const formattedDate = moment(date).format('YYYY-MM-DD HH:mm');
     const convertedDate = moment.tz(formattedDate, tz);
     const utcTime = convertedDate.clone().utc();
-    const newPost = this.postRepository.create({
-      date: utcTime.toDate(),
-    });
     console.log({
       convertedDate: convertedDate.toString(),
       utcTime: utcTime.toString(),
     });
-    await this.postRepository.save(newPost);
+
+    // MONGO START
+    const newPost = new this.postModel({ date: utcTime.toDate() });
+    await newPost.save();
+    // MONGO END
+
+    // const newPost = this.postRepository.create({
+    //   date: utcTime.toDate(),
+    // });
+    // await this.postRepository.save(newPost);
+
     return newPost;
   }
 }
