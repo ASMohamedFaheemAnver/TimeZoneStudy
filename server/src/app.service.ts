@@ -29,6 +29,7 @@ export class AppService {
   }
 
   async createPost(date: Date, tz: string): Promise<PostEntity> {
+    // SERVER SHOULD BE IN UTC TO MAKE IT WORK
     console.log({ date, tz });
     // MONGO START
     // const newDate = new this.postModel({ date });
