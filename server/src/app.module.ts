@@ -9,6 +9,7 @@ import { Post, PostSchema } from './schemas/post.schema';
 import { Post as PostEntity } from './entities/post.entity';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { type, host, port, username, password, database } from './config';
+import { DateScalar } from './scalar/DateScalar';
 
 @Module({
   imports: [
@@ -32,6 +33,6 @@ import { type, host, port, username, password, database } from './config';
     MongooseModule.forFeature([{ name: Post.name, schema: PostSchema }]),
   ],
   controllers: [],
-  providers: [AppResolver, AppService],
+  providers: [AppResolver, AppService, DateScalar],
 })
 export class AppModule {}

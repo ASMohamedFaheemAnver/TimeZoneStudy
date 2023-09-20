@@ -21,7 +21,7 @@ export class AppResolver {
 
   // Mutations
   @Mutation((_) => PostEntity)
-  createPost(@Args('date') date: Date) {
-    return this.appService.createPost(date);
+  createPost(@Args('date') date: Date, @Args('tz') tz: string) {
+    return this.appService.createPost(date, tz);
   }
 }

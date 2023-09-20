@@ -1,2 +1,7 @@
 # To simulate different time zone
 # Customize and control dev tools and sensors and change timezone sensors in the browser.
+
+# .000Z means utc, IDK why graphql automatically concatenate it with timestamps. 
+
+# what's the difference between parseValue and parseLiteral in GraphQLScalarType
+# https://stackoverflow.com/questions/41510880/whats-the-difference-between-parsevalue-and-parseliteral-in-graphqlscalartype

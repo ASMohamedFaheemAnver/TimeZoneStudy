@@ -8,7 +8,7 @@ const client = new ApolloClient({
         fields: {
           date: {
             read(value) {
-              console.log({ value });
+              // console.log({ value });
               return new Date(value);
             },
           },

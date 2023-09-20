@@ -4,14 +4,11 @@
 
 type Post {
   id: ID!
-  date: DateTime!
-  created: DateTime!
+  date: Date!
+  created: Date!
 }
 
-"""
-A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
-"""
-scalar DateTime
+scalar Date
 
 type Message {
   message: String!
@@ -23,5 +20,5 @@ type Query {
 }
 
 type Mutation {
-  createPost(date: DateTime!): Post!
+  createPost(date: Date!, tz: String!): Post!
 }
